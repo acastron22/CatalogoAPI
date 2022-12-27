@@ -30,3 +30,12 @@ C:\Users\ariel\source\repos\CatalagoAPI\CatalagoAPI\obj\Debug\net6.0\refint\Cata
 C:\Users\ariel\source\repos\CatalagoAPI\CatalagoAPI\obj\Debug\net6.0\CatalagoAPI.pdb
 C:\Users\ariel\source\repos\CatalagoAPI\CatalagoAPI\obj\Debug\net6.0\CatalagoAPI.genruntimeconfig.cache
 C:\Users\ariel\source\repos\CatalagoAPI\CatalagoAPI\obj\Debug\net6.0\ref\CatalagoAPI.dll
+C:\Users\ariel\source\repos\CatalagoAPI\CatalagoAPI\bin\Debug\net6.0\Humanizer.dll
+C:\Users\ariel\source\repos\CatalagoAPI\CatalagoAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\ariel\source\repos\CatalagoAPI\CatalagoAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\ariel\source\repos\CatalagoAPI\CatalagoAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\ariel\source\repos\CatalagoAPI\CatalagoAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\ariel\source\repos\CatalagoAPI\CatalagoAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\ariel\source\repos\CatalagoAPI\CatalagoAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\ariel\source\repos\CatalagoAPI\CatalagoAPI\bin\Debug\net6.0\MySqlConnector.dll
+C:\Users\ariel\source\repos\CatalagoAPI\CatalagoAPI\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
