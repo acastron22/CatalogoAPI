@@ -29,8 +29,8 @@ namespace CatalagoAPI.Controllers
         {
             try
             {
-                throw new DataMisalignedException();
-                //return _context.Categorias.AsNoTracking().ToList();
+              //  throw new DataMisalignedException();
+                return _context.Categorias.AsNoTracking().ToList();
             }
             catch (Exception)
             {
