@@ -80,3 +80,4 @@ C:\Users\ariel.neves\Desktop\Estudos\CatalogoAPI\CatalagoAPI\obj\Debug\net6.0\re
 C:\Users\ariel.neves\Desktop\Estudos\CatalogoAPI\CatalagoAPI\obj\Debug\net6.0\CatalagoAPI.pdb
 C:\Users\ariel.neves\Desktop\Estudos\CatalogoAPI\CatalagoAPI\obj\Debug\net6.0\CatalagoAPI.genruntimeconfig.cache
 C:\Users\ariel.neves\Desktop\Estudos\CatalogoAPI\CatalagoAPI\obj\Debug\net6.0\ref\CatalagoAPI.dll
+C:\Users\ariel.neves\Desktop\Estudos\CatalogoAPI\CatalagoAPI\bin\Debug\net6.0\MongoDB.Bson.dll

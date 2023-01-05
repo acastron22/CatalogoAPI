@@ -10,6 +10,7 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Design": "6.0.12",
           "Microsoft.EntityFrameworkCore.Relational": "6.0.12",
+          "MongoDB.Bson": "2.18.0",
           "Pomelo.EntityFrameworkCore.MySql": "6.0.2",
           "Swashbuckle.AspNetCore": "6.2.3"
         },
@@ -140,6 +141,17 @@
           "lib/netstandard2.0/Microsoft.OpenApi.dll": {
             "assemblyVersion": "1.2.3.0",
             "fileVersion": "1.2.3.0"
+          }
+        }
+      },
+      "MongoDB.Bson/2.18.0": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/MongoDB.Bson.dll": {
+            "assemblyVersion": "2.18.0.0",
+            "fileVersion": "2.18.0.0"
           }
         }
       },
@@ -339,6 +351,13 @@
       "sha512": "sha512-Nug3rO+7Kl5/SBAadzSMAVgqDlfGjJZ0GenQrLywJ84XGKO0uRqkunz5Wyl0SDwcR71bAATXvSdbdzPrYRYKGw==",
       "path": "microsoft.openapi/1.2.3",
       "hashPath": "microsoft.openapi.1.2.3.nupkg.sha512"
+    },
+    "MongoDB.Bson/2.18.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-iyiVjkCAZIUiyYDZXXUqISeW7n3O/qcM90PUeJybryg7g4rXhSMRY0oLpAg+NdoXD/Qm9LlmVIePAluHQB91tQ==",
+      "path": "mongodb.bson/2.18.0",
+      "hashPath": "mongodb.bson.2.18.0.nupkg.sha512"
     },
     "MySqlConnector/2.1.2": {
       "type": "package",

@@ -26,7 +26,5 @@ namespace CatalagoAPI.Filters
             _logger.LogInformation($"{DateTime.Now.ToLongTimeString()}");
             _logger.LogInformation("###################################");
         }
-
-        
     }
 }

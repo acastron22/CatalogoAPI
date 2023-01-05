@@ -13,10 +13,14 @@ public class CategoriasController : ControllerBase
 {
     private readonly AppDbContext _context;
 
-    public CategoriasController(AppDbContext context)
+    private readonly ILogger _logger;
+
+    public CategoriasController(AppDbContext context, ILogger<CategoriasController> logger)
     {
         _context = context;
+        _logger = logger;
     }
+
 
     [HttpGet("saudacao/{nome}")]
     public ActionResult<string> GetSaudacao([FromServices] IMeuServico meuServico, string nome)
@@ -28,6 +32,7 @@ public class CategoriasController : ControllerBase
     [HttpGet("produtos")]
     public ActionResult<IEnumerable<Categoria>> GetCategoriasProdutos()
     {
+        _logger.LogInformation("======================= GET categorias/categorias =======================");
         return _context.Categorias.Include( p => p.Produtos).AsNoTracking().ToList();
     }
 
@@ -53,9 +58,11 @@ public class CategoriasController : ControllerBase
     {
         try
         {
+            _logger.LogInformation($"======================= GET categorias/categorias/id = {id} =======================");
             var categoria = _context.Categorias.FirstOrDefault(p => p.CategoriaId == id);
             if (categoria is null)
             {
+                _logger.LogInformation($"======================= GET categorias/categorias/id = {id} NOT FOUND =======================");
                 return NotFound($"Categoria com id = {id} não encontrada");
             }
             return Ok(categoria);

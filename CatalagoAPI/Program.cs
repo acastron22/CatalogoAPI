@@ -1,4 +1,5 @@
 using CatalagoAPI.Context;
+using CatalagoAPI.Extensions;
 using CatalagoAPI.Filters;
 using CatalagoAPI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,9 @@ string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConne
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
 
 var app = builder.Build();
+
+// Adiciona o middleware de tratamento de erros
+app.ConfigureExceptionHandler();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

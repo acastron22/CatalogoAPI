@@ -5,6 +5,7 @@ namespace CatalagoAPI.Models;
 
 public class Categoria
 {
+
     public Categoria()
     {
         Produtos = new Collection<Produto>();
