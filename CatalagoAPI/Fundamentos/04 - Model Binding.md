@@ -71,3 +71,13 @@
 		[BindNever]
 		public string ImageUrl {get;set;}
 	}
+
+# Atributo FromService
+
+	O Atributo [FromServices] permite injetar as dependências diretamente no método Action do controlador que requer a dependência.
+	Para fazer isso funcionar basta adicionar o atributo ao método Action desejado, e a ASP .NET Core vai buscar de forma automática nas dependências
+	as implementações e vai fazer injeção da dependência.
+
+	- Definir os serviços
+	- Registrar os serviços
+	- Aplicar o atributo ao método Action do Controlador que requer o serviço
