@@ -1,7 +1,6 @@
 ﻿using CatalagoAPI.Context;
-using CatalagoAPI.Filters;
 using CatalagoAPI.Models;
-using Microsoft.AspNetCore.Http;
+using CatalagoAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
@@ -12,63 +11,31 @@ namespace CatalagoAPI.Controllers;
 [ApiController]
 public class ProdutosController : ControllerBase
 {
-    private readonly AppDbContext _context;
+    private readonly IUnitOfWork _uof;
 
-    public ProdutosController(AppDbContext context)
+    public ProdutosController(IUnitOfWork context)
     {
-        _context = context;
+        _uof = context;
     }
-
-    // /produtos
-    //[HttpGet("primeiro")] // este endpoit agora é um get igual ao get de receber todos os produtos
-    //// o endpoint e o verbo são os mesmos
-    //// isso gera um erro e não permite carregar a aplicação porque há mais de um endpoint atendendo esse request
-    //// para resolver esse problema, adicionamos um parâmetro dps do atributo como o exemplo '("primeiro")'
-    //// primeiro vai compor a rota e agora o endpoint será /produtos/primeiro
-    //public ActionResult<Produto> GetPrimeiro()
-    //{
-    //    var produtos = _context.Produtos?.FirstOrDefault();
-    //    if (produtos is null)
-    //    {
-    //        return NotFound("Produtos não encontrados");
-    //    }
-    //    return produtos;
-    //}
-
-    // Requisições async
 
     [HttpGet]
-    [ServiceFilter(typeof(ApiLoggingFilter))]
-    public async Task<ActionResult<IEnumerable<Produto>>> Get()
+    public ActionResult<IEnumerable<Produto>> GetProdutosPreco()
     {
-        return await _context.Produtos.AsNoTracking().ToListAsync();
+        return _uof.ProdutoRepository.GetProdutosPorPreco().ToList();
     }
 
-    //[HttpGet("{valor:alpha:length(5)}")]
-    //public ActionResult<Produto> Get2(string valor)
-    //{
-
-    //    return _context.Produtos.FirstOrDefault();
-    //}
-
-    // /produtos
-    //[HttpGet]
-    //public ActionResult<IEnumerable<Produto>> Get()
-    //{
-    //    var produtos = _context.Produtos?.ToList();
-    //    if (produtos is null)
-    //    {
-    //        return NotFound("Produtos não encontrados");
-    //    }
-    //    return produtos;
-    //}
+    [HttpGet]
+    public  ActionResult<IEnumerable<Produto>> Get()
+    {
+        return  _uof.ProdutoRepository.Get().ToList();
+    }
 
     // produtos/id
     [HttpGet("{id}", Name = "ObterProduto")]
-    public async Task<ActionResult<Produto>> Get(int id, [BindRequired] string nome) // o BindRequired torna o campo obrigatório
+    public ActionResult<Produto> Get(int id, [BindRequired] string nome) // o BindRequired torna o campo obrigatório
     {
         var nomeProduto = nome;
-        var produto = await _context.Produtos?.FirstOrDefaultAsync(p => p.ProdutoID == id);
+        var produto = _uof.ProdutoRepository.GetById(p => p.ProdutoID == id);
         if (produto is null)
         {
             return NotFound("Produto não encontrando");
@@ -84,8 +51,8 @@ public class ProdutosController : ControllerBase
         {
             return BadRequest();
         }
-        _context.Produtos?.Add(produto);
-        _context.SaveChanges();
+        _uof.ProdutoRepository.Add(produto);
+        _uof.Commit();
 
         return new CreatedAtRouteResult("ObterProduto",
             new { id = produto.ProdutoID }, produto);
@@ -100,8 +67,8 @@ public class ProdutosController : ControllerBase
             return BadRequest();
         }
 
-        _context.Entry(produto).State = EntityState.Modified;
-        _context.SaveChanges();
+        _uof.ProdutoRepository.Update(produto);
+        _uof.Commit();
 
         return Ok(produto);
     }
@@ -110,13 +77,13 @@ public class ProdutosController : ControllerBase
     [HttpDelete("{id:int}")]
     public ActionResult Delete(int id)
     {
-        var produto = _context.Produtos?.FirstOrDefault(p => p.ProdutoID == id);
+        var produto = _uof.ProdutoRepository.GetById(p => p.ProdutoID == id);
         if (produto is null)
         {
             return NotFound("Produto não localizado...");
         }
-        _context.Produtos?.Remove(produto);
-        _context.SaveChanges();
+        _uof.ProdutoRepository.Delete(produto);
+        _uof.Commit();
 
         return Ok(produto);
     }
