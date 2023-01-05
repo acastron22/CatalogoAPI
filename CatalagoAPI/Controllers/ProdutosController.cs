@@ -1,4 +1,5 @@
 ﻿using CatalagoAPI.Context;
+using CatalagoAPI.Filters;
 using CatalagoAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +38,8 @@ public class ProdutosController : ControllerBase
     // Requisições async
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Produto>>> Get2()
+    [ServiceFilter(typeof(ApiLoggingFilter))]
+    public async Task<ActionResult<IEnumerable<Produto>>> Get()
     {
         return await _context.Produtos.AsNoTracking().ToListAsync();
     }

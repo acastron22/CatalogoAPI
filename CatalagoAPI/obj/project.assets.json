@@ -283,6 +283,22 @@
           }
         }
       },
+      "MongoDB.Bson/2.18.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/MongoDB.Bson.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/MongoDB.Bson.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "MySqlConnector/2.1.2": {
         "type": "package",
         "compile": {
@@ -792,6 +808,25 @@
         "microsoft.openapi.nuspec"
       ]
     },
+    "MongoDB.Bson/2.18.0": {
+      "sha512": "iyiVjkCAZIUiyYDZXXUqISeW7n3O/qcM90PUeJybryg7g4rXhSMRY0oLpAg+NdoXD/Qm9LlmVIePAluHQB91tQ==",
+      "type": "package",
+      "path": "mongodb.bson/2.18.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "lib/net472/MongoDB.Bson.dll",
+        "lib/net472/MongoDB.Bson.xml",
+        "lib/netstandard2.0/MongoDB.Bson.dll",
+        "lib/netstandard2.0/MongoDB.Bson.xml",
+        "lib/netstandard2.1/MongoDB.Bson.dll",
+        "lib/netstandard2.1/MongoDB.Bson.xml",
+        "mongodb.bson.2.18.0.nupkg.sha512",
+        "mongodb.bson.nuspec",
+        "packageIcon.png"
+      ]
+    },
     "MySqlConnector/2.1.2": {
       "sha512": "JVokQTUNN3WHAu9Vw8ieeq1dXTFokJiig5P0VJ4f439UxRrsPo6SaVWC8Zdm6mkPeQFhZ0/9afdWa02EY/1j/w==",
       "type": "package",
@@ -994,6 +1029,7 @@
     "net6.0": [
       "Microsoft.EntityFrameworkCore.Design >= 6.0.12",
       "Microsoft.EntityFrameworkCore.Relational >= 6.0.12",
+      "MongoDB.Bson >= 2.18.0",
       "Pomelo.EntityFrameworkCore.MySql >= 6.0.2",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
@@ -1053,6 +1089,10 @@
           "Microsoft.EntityFrameworkCore.Relational": {
             "target": "Package",
             "version": "[6.0.12, )"
+          },
+          "MongoDB.Bson": {
+            "target": "Package",
+            "version": "[2.18.0, )"
           },
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
