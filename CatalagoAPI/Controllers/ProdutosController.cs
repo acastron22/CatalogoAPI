@@ -2,10 +2,13 @@
 using CatalagoAPI.Context;
 using CatalagoAPI.DTOs;
 using CatalagoAPI.Models;
+using CatalagoAPI.Pagination;
 using CatalagoAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CatalagoAPI.Controllers;
 
@@ -33,9 +36,22 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpGet]
-    public  ActionResult<IEnumerable<ProdutoDTO>> Get()
+    public  ActionResult<IEnumerable<ProdutoDTO>> Get([FromQuery] ProdutosParameters produtosParameter)
     {
-        var produtos =  _uof.ProdutoRepository.Get().ToList();
+        var produtos =  _uof.ProdutoRepository.GetProdutos(produtosParameter);
+
+        var metadata = new
+        {
+            produtos.TotalCount,
+            produtos.PageSize,
+            produtos.CurrentPage,
+            produtos.TotalPages,
+            produtos.HasNext,
+            produtos.HasPrevius
+        };
+
+        Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+
 
         var produtosDTO = _mapper.Map<List<ProdutoDTO>>(produtos);
         return produtosDTO;
