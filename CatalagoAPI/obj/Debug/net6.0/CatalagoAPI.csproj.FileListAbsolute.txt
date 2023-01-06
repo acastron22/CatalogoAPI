@@ -81,3 +81,5 @@ C:\Users\ariel.neves\Desktop\Estudos\CatalogoAPI\CatalagoAPI\obj\Debug\net6.0\Ca
 C:\Users\ariel.neves\Desktop\Estudos\CatalogoAPI\CatalagoAPI\obj\Debug\net6.0\CatalagoAPI.genruntimeconfig.cache
 C:\Users\ariel.neves\Desktop\Estudos\CatalogoAPI\CatalagoAPI\obj\Debug\net6.0\ref\CatalagoAPI.dll
 C:\Users\ariel.neves\Desktop\Estudos\CatalogoAPI\CatalagoAPI\bin\Debug\net6.0\MongoDB.Bson.dll
+C:\Users\ariel.neves\Desktop\Estudos\CatalogoAPI\CatalagoAPI\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\ariel.neves\Desktop\Estudos\CatalogoAPI\CatalagoAPI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

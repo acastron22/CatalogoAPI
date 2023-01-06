@@ -1,4 +1,6 @@
-﻿using CatalagoAPI.Context;
+﻿using AutoMapper;
+using CatalagoAPI.Context;
+using CatalagoAPI.DTOs;
 using CatalagoAPI.Models;
 using CatalagoAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -7,65 +9,78 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CatalagoAPI.Controllers;
 
-[Route("[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class ProdutosController : ControllerBase
 {
     private readonly IUnitOfWork _uof;
+    private readonly IMapper _mapper;
 
-    public ProdutosController(IUnitOfWork context)
+    public ProdutosController(IUnitOfWork context, IMapper mapper)
     {
         _uof = context;
+        _mapper = mapper;
+    }
+
+    [HttpGet("menorpreco")]
+    public ActionResult<IEnumerable<ProdutoDTO>> GetProdutosPreco()
+    {
+        var produtos = _uof.ProdutoRepository.GetProdutosPorPreco().ToList();
+        // Mapeamos produtos para uma lista de ProdutoDTO
+        var produtosDto = _mapper.Map<List<ProdutoDTO>>(produtos);
+
+        return produtosDto;
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Produto>> GetProdutosPreco()
+    public  ActionResult<IEnumerable<ProdutoDTO>> Get()
     {
-        return _uof.ProdutoRepository.GetProdutosPorPreco().ToList();
-    }
+        var produtos =  _uof.ProdutoRepository.Get().ToList();
 
-    [HttpGet]
-    public  ActionResult<IEnumerable<Produto>> Get()
-    {
-        return  _uof.ProdutoRepository.Get().ToList();
+        var produtosDTO = _mapper.Map<List<ProdutoDTO>>(produtos);
+        return produtosDTO;
     }
 
     // produtos/id
-    [HttpGet("{id}", Name = "ObterProduto")]
-    public ActionResult<Produto> Get(int id, [BindRequired] string nome) // o BindRequired torna o campo obrigatório
+    [HttpGet("{id}")]
+    public ActionResult<ProdutoDTO> Get(int id) // o BindRequired torna o campo obrigatório
     {
-        var nomeProduto = nome;
         var produto = _uof.ProdutoRepository.GetById(p => p.ProdutoID == id);
         if (produto is null)
         {
             return NotFound("Produto não encontrando");
         }
-        return produto;
+
+        // não estou retornando uma lista de produto, e sim só um produto,por isso não uso a classe List
+        var produtoDTO = _mapper.Map<ProdutoDTO>(produto);
+
+        return produtoDTO;
     }
 
     // /produtos - mesmo tendo um atributo diferente, o método só atende o request para post
     [HttpPost]
-    public ActionResult Post(Produto produto)
+    public ActionResult Post([FromBody] ProdutoDTO produtoDto)
     {
-        if (produto is null)
-        {
-            return BadRequest();
-        }
+        var produto = _mapper.Map<Produto>(produtoDto);
         _uof.ProdutoRepository.Add(produto);
         _uof.Commit();
 
+        var produtoDTO = _mapper.Map<ProdutoDTO>(produto);
+
         return new CreatedAtRouteResult("ObterProduto",
-            new { id = produto.ProdutoID }, produto);
+            new { id = produto.ProdutoID }, produtoDTO);
     }
 
     // /produtos/id
     [HttpPut("{id:int}")]
-    public ActionResult Put(int id, Produto produto)
+    public ActionResult Put(int id, Produto produtoDto)
     {
-        if (id != produto.ProdutoID)
+        if (id != produtoDto.ProdutoID)
         {
             return BadRequest();
         }
+
+        var produto = _mapper.Map<Produto>(produtoDto);
 
         _uof.ProdutoRepository.Update(produto);
         _uof.Commit();
@@ -75,16 +90,20 @@ public class ProdutosController : ControllerBase
 
     // /produtos/id
     [HttpDelete("{id:int}")]
-    public ActionResult Delete(int id)
+    public ActionResult<ProdutoDTO>Delete(int id)
     {
         var produto = _uof.ProdutoRepository.GetById(p => p.ProdutoID == id);
         if (produto is null)
         {
             return NotFound("Produto não localizado...");
         }
+
+
         _uof.ProdutoRepository.Delete(produto);
         _uof.Commit();
 
-        return Ok(produto);
+        var produtoDto = _mapper.Map<ProdutoDTO>(produto);
+
+        return Ok(produtoDto);
     }
 }

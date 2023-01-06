@@ -1,4 +1,6 @@
+using AutoMapper;
 using CatalagoAPI.Context;
+using CatalagoAPI.DTOs.Mappings;
 using CatalagoAPI.Extensions;
 using CatalagoAPI.Filters;
 using CatalagoAPI.Repository;
@@ -24,6 +26,18 @@ string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConne
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// Mapper
+var mappingConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MappingProfile());
+});
+
+IMapper mapper = mappingConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+
+// Fim do Mapper
+
 
 var app = builder.Build();
 
