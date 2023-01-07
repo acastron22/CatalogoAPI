@@ -1,6 +1,7 @@
 ﻿using CatalagoAPI.Context;
 using CatalagoAPI.Models;
 using CatalagoAPI.Pagination;
+using Microsoft.EntityFrameworkCore;
 
 namespace CatalagoAPI.Repository
 {
@@ -20,9 +21,9 @@ namespace CatalagoAPI.Repository
             return PagedList<Produto>.ToPagedList(Get().OrderBy(on => on.ProdutoID), produtosParameters.PageNumber, produtosParameters.PageSize);
         }
 
-        public IEnumerable<Produto> GetProdutosPorPreco()
+        public async  Task<IEnumerable<Produto>> GetProdutosPorPreco()
         {
-            return Get().OrderBy(c => c.Preco).ToArray();
+            return  await Get().OrderBy(c => c.Preco).ToListAsync();
         }
     }
 }

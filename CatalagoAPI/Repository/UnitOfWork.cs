@@ -28,9 +28,9 @@ namespace CatalagoAPI.Repository
             }
         }
 
-        public void Commit()
+        public async Task Commit() //Só preciso adicionar o async no commit q é qnd ele vai pro banco de dados
         {
-           _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
 
         public void Dispose()
