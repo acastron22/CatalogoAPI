@@ -2,11 +2,14 @@
 using CatalagoAPI.Context;
 using CatalagoAPI.DTOs;
 using CatalagoAPI.Models;
+using CatalagoAPI.Pagination;
 using CatalagoAPI.Repository;
 using CatalagoAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson.IO;
+using System.Text.Json;
 
 namespace CatalagoAPI.Controllers;
 
@@ -40,20 +43,26 @@ public class CategoriasController : ControllerBase
 
     // retorna as  categorias
     [HttpGet]
-    public ActionResult<IEnumerable<CategoriaDTO>> Get()
+    public ActionResult<IEnumerable<CategoriaDTO>>
+        Get([FromQuery] CategoriasParameters categoriasParameters)
     {
-        try
+        var categorias = _uof.CategoriaRepository.
+                           GetCategorias(categoriasParameters);
+        var metadata = new
         {
-          //  throw new DataMisalignedException();
-            var categorias = _uof.CategoriaRepository.Get().ToList();
-            var categoriasDto = _mapper.Map<List<CategoriaDTO>>(categorias);
-            return categoriasDto;
-        }
-        catch (Exception)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um problema ao tratar a sua solicitação");
-        }
-                    
+            categorias.TotalCount,
+            categorias.PageSize,
+            categorias.CurrentPage,
+            categorias.TotalPages,
+            categorias.HasNext,
+            categorias.HasPrevius
+        };
+
+        Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+
+        var categoriasDto = _mapper.Map<List<CategoriaDTO>>(categorias);
+        return categoriasDto;
+
     }
 
     // retorna uma categoria por id
