@@ -38,7 +38,7 @@ public class CategoriasController : ControllerBase
         return categoriasDto;
     }
 
-    // retorna as 
+    // retorna as  categorias
     [HttpGet]
     public ActionResult<IEnumerable<CategoriaDTO>> Get()
     {

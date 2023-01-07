@@ -1,5 +1,6 @@
 ﻿using CatalagoAPI.Context;
 using CatalagoAPI.Models;
+using CatalagoAPI.Pagination;
 using Microsoft.EntityFrameworkCore;
 
 namespace CatalagoAPI.Repository
@@ -10,6 +11,14 @@ namespace CatalagoAPI.Repository
         {
 
         }
+
+        public PagedList<Categoria> GetCategorias(CategoriasParameters categoriaParameters)
+        {
+            return PagedList<Categoria>.ToPagedList(Get().OrderBy(on => on.Nome),
+                              categoriaParameters.PageNumber,
+                              categoriaParameters.PageSize);
+        }
+
         public IEnumerable<Categoria> GetCategoriasProdutos()
         {
             return Get().Include(x => x.Produtos);
