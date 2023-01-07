@@ -26,9 +26,9 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpGet("menorpreco")]
-    public ActionResult<IEnumerable<ProdutoDTO>> GetProdutosPreco()
+    public async Task<ActionResult<IEnumerable<ProdutoDTO>>> GetProdutosPreco()
     {
-        var produtos = _uof.ProdutoRepository.GetProdutosPorPreco().ToList();
+        var produtos =await _uof.ProdutoRepository.GetProdutosPorPreco();
         // Mapeamos produtos para uma lista de ProdutoDTO
         var produtosDto = _mapper.Map<List<ProdutoDTO>>(produtos);
 
@@ -59,9 +59,9 @@ public class ProdutosController : ControllerBase
 
     // produtos/id
     [HttpGet("{id}")]
-    public ActionResult<ProdutoDTO> Get(int id) // o BindRequired torna o campo obrigatório
+    public async Task<ActionResult<ProdutoDTO>> Get(int id) // o BindRequired torna o campo obrigatório
     {
-        var produto = _uof.ProdutoRepository.GetById(p => p.ProdutoID == id);
+        var produto = await _uof.ProdutoRepository.GetById(p => p.ProdutoID == id);
         if (produto is null)
         {
             return NotFound("Produto não encontrando");
@@ -75,11 +75,11 @@ public class ProdutosController : ControllerBase
 
     // /produtos - mesmo tendo um atributo diferente, o método só atende o request para post
     [HttpPost]
-    public ActionResult Post([FromBody] ProdutoDTO produtoDto)
+    public async Task<ActionResult> Post([FromBody] ProdutoDTO produtoDto)
     {
         var produto = _mapper.Map<Produto>(produtoDto);
         _uof.ProdutoRepository.Add(produto);
-        _uof.Commit();
+       await _uof.Commit();
 
         var produtoDTO = _mapper.Map<ProdutoDTO>(produto);
 
@@ -89,7 +89,7 @@ public class ProdutosController : ControllerBase
 
     // /produtos/id
     [HttpPut("{id:int}")]
-    public ActionResult Put(int id, Produto produtoDto)
+    public async Task<ActionResult> Put(int id, Produto produtoDto)
     {
         if (id != produtoDto.ProdutoID)
         {
@@ -99,16 +99,16 @@ public class ProdutosController : ControllerBase
         var produto = _mapper.Map<Produto>(produtoDto);
 
         _uof.ProdutoRepository.Update(produto);
-        _uof.Commit();
+        await _uof.Commit();
 
         return Ok(produto);
     }
 
     // /produtos/id
     [HttpDelete("{id:int}")]
-    public ActionResult<ProdutoDTO>Delete(int id)
+    public async Task<ActionResult<ProdutoDTO>>Delete(int id)
     {
-        var produto = _uof.ProdutoRepository.GetById(p => p.ProdutoID == id);
+        var produto = await _uof.ProdutoRepository.GetById(p => p.ProdutoID == id);
         if (produto is null)
         {
             return NotFound("Produto não localizado...");
@@ -116,7 +116,7 @@ public class ProdutosController : ControllerBase
 
 
         _uof.ProdutoRepository.Delete(produto);
-        _uof.Commit();
+        await _uof.Commit();
 
         var produtoDto = _mapper.Map<ProdutoDTO>(produto);
 
