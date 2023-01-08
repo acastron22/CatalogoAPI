@@ -11,14 +11,14 @@ namespace CatalagoAPI.Repository
         {
         }
 
-        public PagedList<Produto> GetProdutos(ProdutosParameters produtosParameters)
+        public async Task<PagedList<Produto>> GetProdutos(ProdutosParameters produtosParameters)
         {
             //return Get()
             //    .OrderBy(on => on.Name)
             //    .Skip((produtosParameters.PageNumber - 1) * produtosParameters.PageSize)
             //    .Take(produtosParameters.PageSize)
             //    .ToList();
-            return PagedList<Produto>.ToPagedList(Get().OrderBy(on => on.ProdutoID), produtosParameters.PageNumber, produtosParameters.PageSize);
+            return await PagedList<Produto>.ToPagedList(Get().OrderBy(on => on.ProdutoID), produtosParameters.PageNumber, produtosParameters.PageSize);
         }
 
         public async  Task<IEnumerable<Produto>> GetProdutosPorPreco()

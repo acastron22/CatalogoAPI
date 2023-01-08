@@ -12,9 +12,9 @@ namespace CatalagoAPI.Repository
 
         }
 
-        public  PagedList<Categoria> GetCategorias(CategoriasParameters categoriaParameters)
+        public async  Task<PagedList<Categoria>> GetCategorias(CategoriasParameters categoriaParameters)
         {
-            return PagedList<Categoria>.ToPagedList(Get().OrderBy(on => on.Nome),
+            return await PagedList<Categoria>.ToPagedList(Get().OrderBy(on => on.CategoriaId),
                               categoriaParameters.PageNumber,
                               categoriaParameters.PageSize);
         }

@@ -36,9 +36,9 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpGet]
-    public  ActionResult<IEnumerable<ProdutoDTO>> Get([FromQuery] ProdutosParameters produtosParameter)
+    public async Task<ActionResult<IEnumerable<ProdutoDTO>>> Get([FromQuery] ProdutosParameters produtosParameter)
     {
-        var produtos =  _uof.ProdutoRepository.GetProdutos(produtosParameter);
+        var produtos = await  _uof.ProdutoRepository.GetProdutos(produtosParameter);
 
         var metadata = new
         {
