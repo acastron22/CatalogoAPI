@@ -45,8 +45,8 @@ builder.Services.AddAuthentication(
         ValidateIssuer= true,
         ValidateAudience= true,
         ValidateLifetime= true,
-        ValidAudience = builder.Configuration["TokenCOnfiguration: Audience"],
-        ValidIssuer = builder.Configuration["TokenConfiguration: Issuer"],
+        ValidAudience = builder.Configuration["TokenCOnfiguration:Audience"],
+        ValidIssuer = builder.Configuration["TokenConfiguration:Issuer"],
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:key"]))
