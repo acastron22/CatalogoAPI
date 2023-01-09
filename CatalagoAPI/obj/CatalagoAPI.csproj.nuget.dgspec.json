@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ariel\\Desktop\\Estudos\\CatalogoAPI\\CatalagoAPI\\CatalagoAPI.csproj": {}
+    "C:\\Users\\ariel.neves\\Desktop\\Estudos\\CatalogoAPI\\CatalagoAPI\\CatalagoAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ariel\\Desktop\\Estudos\\CatalogoAPI\\CatalagoAPI\\CatalagoAPI.csproj": {
+    "C:\\Users\\ariel.neves\\Desktop\\Estudos\\CatalogoAPI\\CatalagoAPI\\CatalagoAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ariel\\Desktop\\Estudos\\CatalogoAPI\\CatalagoAPI\\CatalagoAPI.csproj",
+        "projectUniqueName": "C:\\Users\\ariel.neves\\Desktop\\Estudos\\CatalogoAPI\\CatalagoAPI\\CatalagoAPI.csproj",
         "projectName": "CatalagoAPI",
-        "projectPath": "C:\\Users\\ariel\\Desktop\\Estudos\\CatalogoAPI\\CatalagoAPI\\CatalagoAPI.csproj",
-        "packagesPath": "C:\\Users\\ariel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ariel\\Desktop\\Estudos\\CatalogoAPI\\CatalagoAPI\\obj\\",
+        "projectPath": "C:\\Users\\ariel.neves\\Desktop\\Estudos\\CatalogoAPI\\CatalagoAPI\\CatalagoAPI.csproj",
+        "packagesPath": "C:\\Users\\ariel.neves\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ariel.neves\\Desktop\\Estudos\\CatalogoAPI\\CatalagoAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\ariel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ariel.neves\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
