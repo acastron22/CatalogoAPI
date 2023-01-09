@@ -34,10 +34,10 @@ public class AutorizaController : ControllerBase
     [HttpPost("Register")]
     public async Task<ActionResult> RegisterUser([FromBody]UsuarioDTO model)
     {
-        if (ModelState.IsValid)
-        {
-            return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
-        }
+        //if (ModelState.IsValid)
+        //{
+        //    return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
+        //}
 
         var user = new IdentityUser
         {
@@ -91,19 +91,19 @@ public class AutorizaController : ControllerBase
 
         //Gera uma chave com base em um algoritmo simétrico
         var key = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(_configuration["Jwt: key"]));
+            Encoding.UTF8.GetBytes(_configuration["Jwt:key"]));
 
         // Gera a assinatura digital do token usando o algoritmo HMAC e a chave privada
         var credenciais = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         // Tempo de expi~ração do token.
-        var expiracao = _configuration["TokenConfiguration: ExpireHours"];
+        var expiracao = _configuration["TokenConfiguration:ExpireHours"];
         var expiration = DateTime.UtcNow.AddHours(double.Parse(expiracao));
 
         // classe que representa um token JWT e gera o token
         JwtSecurityToken token = new JwtSecurityToken(
-            issuer: _configuration["TokenConfiguration: Issuer"],
-            audience: _configuration["TokenConfiguration: Audience"],
+            issuer: _configuration["TokenConfiguration:Issuer"],
+            audience: _configuration["TokenConfiguration:Audience"],
             claims: claims,
             expires: expiration,
             signingCredentials: credenciais);
